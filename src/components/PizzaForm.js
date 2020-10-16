@@ -55,7 +55,7 @@ const PizzaForm = props => {
 			// console.log(val);
 			change("toppings", val[1]);
 		} else {
-			const valueToUse = (type === "checkbox") ? checked : value;	
+			const valueToUse = (type === "checkbox") ? checked : value;
 			// console.log(name, valueToUse);
 			change(name, valueToUse);
 		}
@@ -73,7 +73,7 @@ const PizzaForm = props => {
 			</div>
 			<div className="form-group submit">
 				<h2>Build Your Own Pizza</h2>
-				<label>
+				<div>
 					Choice of Size
 					<h6>Required</h6>
 					<select name="size" value={values.size} onChange={onChange}>
@@ -83,8 +83,28 @@ const PizzaForm = props => {
 						<option value="md">Medium</option>
 						<option value="sm">Small</option>
 					</select>
-				</label>
-				<label>
+				</div>
+				<div>
+					Choice of Sauce
+					<h6>Required</h6>
+					<label>
+						Original Red
+						<input type="radio" name="sauce" value="og-red" checked={values.sauce === "og-red"} onChange={onChange} />
+					</label>
+					<label>
+						Garlic Ranch
+						<input type="radio" name="sauce" value="garlic-ranch" checked={values.sauce === "garlic-ranch"} onChange={onChange} />
+					</label>
+					<label>
+						BBQ Sauce
+						<input type="radio" name="sauce" value="bbq" checked={values.sauce === "bbq"} onChange={onChange} />
+					</label>
+					<label>
+						Spinach Alfredo
+						<input type="radio" name="sauce" value="spinach-alfredo" checked={values.sauce === "spinach-alfredo"} onChange={onChange} />
+					</label>
+				</div>
+				<div>
 					Add Toppings
 					<h6>Choose up to 10</h6>
 					{
@@ -97,21 +117,32 @@ const PizzaForm = props => {
 							);
 						})
 					}
-
-				</label>
-				<label>
+				</div>
+				<div>
 					Choice of Substitute
 					<h6>Choose up to 1.</h6>
 					<ToggleSwitch class="switch">
-					
 						<input type="checkbox" name="glutenFree" checked={values.glutenFree}
 							onChange={onChange} />
 						<span className="slider"></span>
-					Gluten Free Crust
-				</ToggleSwitch>
+					</ToggleSwitch>
+					<p>Gluten Free Crust</p>
+				</div>
+			</div>
+			<div>
+				Special Instructions
+				<textarea name="instructions" value={values.instructions} rows="2" cols="35" placeholder={"Anything else you'd like to add?"} onChange={onChange} />
+			</div>
+			<div>
+				<label>
+					Name
+					<input type="text" name="name" value={values.name} placeholder={"Your name here"} onChange={onChange} />
 				</label>
 			</div>
-			<button>Add to Order</button>
+			<div>
+				<input type="number" name="number" value={values.number} min="1" max="20" onChange={onChange} />
+			</div>
+			<button id="submitBtn" disabled={disabled}>Add to Order</button>
 		</form>
 	);
 };

@@ -3,7 +3,7 @@ import * as Yup from "yup";
 const formSchema = Yup.object().shape({
 	size: Yup
 		.string()
-		.oneOf(["xl, lg, md, sm"])
+		.oneOf(["xl", "lg", "md", "sm"])
 		.required(),
 	sauce: Yup
 		.string()
@@ -14,20 +14,20 @@ const formSchema = Yup.object().shape({
 	// 	.of(
 	// 		Yup.string().min(0).max(10))
 	// 	.required(),
-	pepperoni: Yup.boolean(),
-	sausage: Yup.boolean(),
-	canadianBacon: Yup.boolean(),
-	spicyItalianSausage: Yup.boolean(),
-	grilledChicken: Yup.boolean(),
-	onions: Yup.boolean(),
-	greenPepper: Yup.boolean(),
-	dicedTomatoes: Yup.boolean(),
-	blackOlives: Yup.boolean(),
-	roastedGarlic: Yup.boolean(),
-	artichokeHearts: Yup.boolean(),
-	threeCheese: Yup.boolean(),
-	pineapple: Yup.boolean(),
-	extraCheese: Yup.boolean(),
+	pepperoni: Yup.boolean().notRequired(),
+	sausage: Yup.boolean().notRequired(),
+	canadianBacon: Yup.boolean().notRequired(),
+	spicyItalianSausage: Yup.boolean().notRequired(),
+	grilledChicken: Yup.boolean().notRequired(),
+	onions: Yup.boolean().notRequired(),
+	greenPepper: Yup.boolean().notRequired(),
+	dicedTomatoes: Yup.boolean().notRequired(),
+	blackOlives: Yup.boolean().notRequired(),
+	roastedGarlic: Yup.boolean().notRequired(),
+	artichokeHearts: Yup.boolean().notRequired(),
+	threeCheese: Yup.boolean().notRequired(),
+	pineapple: Yup.boolean().notRequired(),
+	extraCheese: Yup.boolean().notRequired(),
 	glutenFree: Yup
 		.boolean()
 		.required(),
