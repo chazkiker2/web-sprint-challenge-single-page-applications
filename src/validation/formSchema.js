@@ -34,7 +34,7 @@ const formSchema = Yup.object().shape({
 	name: Yup
 		.string()
 		.required("Name is required")
-		.min(3, "Name must be at least 3 characters long"),
+		.min(2, "Name must be at least 2 characters long"),
 	instructions: Yup.string().notRequired(),
 	number: Yup.number().positive().min(1).max(20),
 });
