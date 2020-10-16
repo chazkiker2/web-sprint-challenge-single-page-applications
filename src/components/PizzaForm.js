@@ -49,8 +49,16 @@ const PizzaForm = props => {
 
 	const onChange = (evt) => {
 		const { name, value, type, checked } = evt.target;
-		const valueToUse = (type === "checkbox") ? checked : value;
-		change(name, valueToUse);
+		// console.log(name, value, type, checked);
+		if (name.includes("top-")) {
+			const val = name.split("-");
+			// console.log(val);
+			change("toppings", val[1]);
+		} else {
+			const valueToUse = (type === "checkbox") ? checked : value;	
+			// console.log(name, valueToUse);
+			change(name, valueToUse);
+		}
 	};
 
 	const onSubmit = (evt) => {
@@ -96,9 +104,9 @@ const PizzaForm = props => {
 					<h6>Choose up to 1.</h6>
 					<ToggleSwitch class="switch">
 					
-						<input type="checkbox" name="gluten-free" checked={values.glutenFree}
+						<input type="checkbox" name="glutenFree" checked={values.glutenFree}
 							onChange={onChange} />
-						<span class="slider"></span>
+						<span className="slider"></span>
 					Gluten Free Crust
 				</ToggleSwitch>
 				</label>

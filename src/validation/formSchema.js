@@ -9,11 +9,25 @@ const formSchema = Yup.object().shape({
 		.string()
 		.oneOf(["og-red", "garlic-ranch", "bbq", "spinach-alfredo"])
 		.required(),
-	toppings: Yup
-		.array()
-		.of(
-			Yup.string().min(0).max(10))
-		.required(),
+	// toppings: Yup
+	// 	.array()
+	// 	.of(
+	// 		Yup.string().min(0).max(10))
+	// 	.required(),
+	pepperoni: Yup.boolean(),
+	sausage: Yup.boolean(),
+	canadianBacon: Yup.boolean(),
+	spicyItalianSausage: Yup.boolean(),
+	grilledChicken: Yup.boolean(),
+	onions: Yup.boolean(),
+	greenPepper: Yup.boolean(),
+	dicedTomatoes: Yup.boolean(),
+	blackOlives: Yup.boolean(),
+	roastedGarlic: Yup.boolean(),
+	artichokeHearts: Yup.boolean(),
+	threeCheese: Yup.boolean(),
+	pineapple: Yup.boolean(),
+	extraCheese: Yup.boolean(),
 	glutenFree: Yup
 		.boolean()
 		.required(),

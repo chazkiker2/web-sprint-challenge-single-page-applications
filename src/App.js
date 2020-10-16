@@ -53,7 +53,22 @@ const initFormValues = {
 	// id: "",
 	size: "",
 	sauce: "",
-	toppings: [],
+	// toppings: {
+		pepperoni: false,
+		sausage: false,
+		canadianBacon: false,
+		spicyItalianSausage: false,
+		grilledChicken: false,
+		onions: false,
+		greenPepper: false,
+		dicedTomatoes: false,
+		blackOlives: false,
+		roastedGarlic: false,
+		artichokeHearts: false,
+		threeCheese: false,
+		pineapple: false,
+		extraCheese: false,
+	// },
 	glutenFree: false,
 	instructions: "",
 	name: "",
@@ -74,8 +89,20 @@ const initFormErrors = {
 const initOrders = [];
 
 const toppingsOptions = [
-	"pepperoni", "sausage", "canadian bacon", "spicy italian sausage", "grilled chicken", "onions", "green pepper", "diced tomatoes", "black olives",
-	"roasted garlic", "artichoke hearts", "three cheese", "pineapple", "extra cheese",
+	"pepperoni",
+	"sausage",
+	"canadianBacon",
+	"spicyItalianSausage",
+	"grilledChicken",
+	"onions",
+	"greenPepper",
+	"dicedTomatoes",
+	"blackOlives",
+	"roastedGarlic",
+	"artichokeHearts",
+	"threeCheese",
+	"pineapple",
+	"extraCheese"
 ];
 
 const App = () => {
@@ -88,10 +115,11 @@ const App = () => {
 
 	//* HELPER FUNCTIONS                              //
 	const postOrder = (newOrder) => {
-		axios.post("https://reqres.in/api/pizza")
+		axios.post("https://reqres.in/api/pizza", newOrder)
 			.then(res => {
-				console.log(res.data);
-				setOrders([ ...orders, res.data.data]);
+				console.log(res);
+				setOrders([...orders, res.data]);
+				console.log(orders);
 			})
 			.catch(err => {
 				console.log(err);
@@ -102,7 +130,7 @@ const App = () => {
 		const newOrder = {
 			size: formValues.size,
 			sauce: formValues.sauce,
-			toppings: toppingsOptions.filter( topping => formValues[topping]),
+			toppings: toppingsOptions.filter(topping => formValues[topping]),
 			glutenFree: formValues.glutenFree,
 			name: formValues.name,
 			instructions: formValues.instructions,
@@ -123,6 +151,13 @@ const App = () => {
 
 		setFormValues({ ...formValues, [key]: value })
 	};
+	// const toppingsChange = (topping, value) => {
+	// 	Yup.reach(formSchema, toppings)
+	// 		.validate(topping)
+	// 		.then(() => {
+	// 			setFormErrors({...formErrors, []})
+	// 		})
+	// }
 	// const formSubmit = () => { };
 
 	//* SIDE EFFECTS                                    //
@@ -149,6 +184,20 @@ const App = () => {
 				</Route>
 				<Route path="/pizza-form">
 					<PizzaForm values={formValues} errors={formErrors} disabled={isDisabled} change={formChange} submit={formSubmit} toppingsOptions={toppingsOptions} />
+					{
+						orders.map(order => {
+							return (
+							<div key={order.id} className="order">
+								<p>SIZE: {order.size}</p>
+								<p>SAUCE: {order.sauce}</p>
+								<p>TOPPINGS: {order.toppings.toString()}</p>
+								<p>GF: {order.glutenFree ? "true" : "false"}</p>
+								<p>NAME: {order.name}</p>
+								<p>NUMBER: {order.number}</p>
+							</div>
+							);
+						})
+					}
 				</Route>
 				<Route path="/">
 					<Home />
