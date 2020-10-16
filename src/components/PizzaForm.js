@@ -22,6 +22,17 @@ const PizzaForm = props => {
 			</div>
 			<div className="form-group submit">
 				<h2>Build Your Own Pizza</h2>
+				<label>
+					Choice of Size
+					<h6>Required</h6>
+					<select name="size" value={values.size}>
+						<option>Select</option>
+						<option value="xl">Extra Large</option>
+						<option value="lg">Large</option>
+						<option value="md">Medium</option>
+						<option value="sm">Small</option>
+					</select>
+				</label>
 			</div>
 		</form>
 	);

@@ -45,10 +45,40 @@ const Header = styled.div`
 	}
 `;
 
+const initFormValues = {
+	id: "",
+	size: "",
+	sauce: "",
+	toppings: [],
+	glutenFree: false,
+	instructions: "",
+	number: 1,
+};
+
+const initFormErrors = {
+	id: "",
+	size: "",
+	sauce: "",
+	toppings: "",
+	glutenFree: "",
+	instructions: "",
+	number: "",
+};
+
+const initOrders = [];
+
 const App = () => {
 
 	// * STATES                                       //
+	const [orders, setOrders] = useState(initOrders);
+	const [formValues, setFormValues] = useState(initFormValues);
+	const [formErrors, setFormErrors] = useState(initFormErrors);
+	const [isDisabled, setIsDisabled] = useState(true);
 
+	//* HELPER FUNCTIONS                              //
+	const formChange = (name, value) => {
+		
+	};
 
 	// *      RENDER                                  //
 	return (
@@ -66,7 +96,7 @@ const App = () => {
 					<Confirmation />
 				</Route>
 				<Route path="/pizza-form">
-					<PizzaForm />
+					<PizzaForm values={formValues} errors={formErrors} disabled={isDisabled} change={formChange} submit={formSubmit} />
 				</Route>
 				<Route path="/">
 					<Home />
