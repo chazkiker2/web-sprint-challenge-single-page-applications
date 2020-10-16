@@ -4,16 +4,12 @@ import styled from "styled-components";
 import * as Yup from "yup";
 import axios from "axios";
 
-// import Header from "./components/Header";
+
 import formSchema from "./validation/formSchema";
 import Home from "./components/Home";
 import PizzaForm from "./components/PizzaForm";
-import Confirmation from "./components/Confirmation";
-import Axios from "axios";
+// import Confirmation from "./components/Confirmation";
 
-// const AppContainer = styled.div`
-// 	width: 100%;
-// `;
 
 const Header = styled.div`
 	width: 100%;
@@ -151,14 +147,6 @@ const App = () => {
 
 		setFormValues({ ...formValues, [key]: value })
 	};
-	// const toppingsChange = (topping, value) => {
-	// 	Yup.reach(formSchema, toppings)
-	// 		.validate(topping)
-	// 		.then(() => {
-	// 			setFormErrors({...formErrors, []})
-	// 		})
-	// }
-	// const formSubmit = () => { };
 
 	//* SIDE EFFECTS                                    //
 	useEffect(() => {
@@ -179,9 +167,9 @@ const App = () => {
 				</nav>
 			</Header>
 			<Switch>
-				<Route path="/pizza-form/confirm">
+				{/* <Route path="/pizza-form/confirm">
 					<Confirmation />
-				</Route>
+				</Route> */}
 				<Route path="/pizza-form">
 					<PizzaForm values={formValues} errors={formErrors} disabled={isDisabled} change={formChange} submit={formSubmit} toppingsOptions={toppingsOptions} />
 					{

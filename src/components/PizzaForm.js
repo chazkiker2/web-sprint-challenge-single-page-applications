@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const ToggleSwitch = styled.label`
@@ -45,7 +45,7 @@ const ToggleSwitch = styled.label`
 
 
 const PizzaForm = props => {
-	const { values, errors, submit, change, disabled, toppingsOptions } = props;
+	const { values, submit, change, disabled, toppingsOptions } = props;
 
 	const onChange = (evt) => {
 		const { name, value, type, checked } = evt.target;
