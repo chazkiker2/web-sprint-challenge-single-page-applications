@@ -25,7 +25,7 @@ const PizzaForm = props => {
 				<label>
 					Choice of Size
 					<h6>Required</h6>
-					<select name="size" value={values.size}>
+					<select name="size" value={values.size} onChange={onChange}>
 						<option>Select</option>
 						<option value="xl">Extra Large</option>
 						<option value="lg">Large</option>

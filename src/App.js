@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Route, Link, Switch } from "react-router-dom";
 import styled from "styled-components";
+import * as Yup from "yup";
 
 // import Header from "./components/Header";
+import formSchema from "./validation/formSchema";
 import Home from "./components/Home";
 import PizzaForm from "./components/PizzaForm";
 import Confirmation from "./components/Confirmation";
@@ -46,22 +48,24 @@ const Header = styled.div`
 `;
 
 const initFormValues = {
-	id: "",
+	// id: "",
 	size: "",
 	sauce: "",
 	toppings: [],
 	glutenFree: false,
 	instructions: "",
+	name: "",
 	number: 1,
 };
 
 const initFormErrors = {
-	id: "",
+	// id: "",
 	size: "",
 	sauce: "",
 	toppings: "",
 	glutenFree: "",
 	instructions: "",
+	name: "",
 	number: "",
 };
 
@@ -76,9 +80,27 @@ const App = () => {
 	const [isDisabled, setIsDisabled] = useState(true);
 
 	//* HELPER FUNCTIONS                              //
-	const formChange = (name, value) => {
-		
+	const formChange = (key, value) => {
+		Yup.reach(formSchema, key)
+			.validate(value)
+			.then( () => {
+				setFormErrors({...formErrors, [key]: "" });
+			})
+			.catch(err => {
+				setFormErrors({...formErrors, [key]: err.errors[0]});
+			});
+
+			setFormValues({ ...formValues, [key]: value })
 	};
+	const formSubmit = () => {};
+	const postOrder = (newOrder) => {};
+
+	//* SIDE EFFECTS                                    //
+	useEffect(() => {
+		formSchema.isValid(formValues).then(valid => {
+			setIsDisabled(!valid);
+		})
+	}, [formValues]);
 
 	// *      RENDER                                  //
 	return (
