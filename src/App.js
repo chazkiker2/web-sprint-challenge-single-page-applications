@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Route, Link, Switch } from "react-router-dom";
 import styled from "styled-components";
 import * as Yup from "yup";
+import axios from "axios";
 
 // import Header from "./components/Header";
 import formSchema from "./validation/formSchema";
 import Home from "./components/Home";
 import PizzaForm from "./components/PizzaForm";
 import Confirmation from "./components/Confirmation";
+import Axios from "axios";
 
 // const AppContainer = styled.div`
 // 	width: 100%;
@@ -71,6 +73,11 @@ const initFormErrors = {
 
 const initOrders = [];
 
+const toppingsOptions = [
+	"pepperoni", "sausage", "canadian bacon", "spicy italian sausage", "grilled chicken", "onions", "green pepper", "diced tomatoes", "black olives",
+	"roasted garlic", "artichoke hearts", "three cheese", "pineapple", "extra cheese",
+];
+
 const App = () => {
 
 	// * STATES                                       //
@@ -80,20 +87,43 @@ const App = () => {
 	const [isDisabled, setIsDisabled] = useState(true);
 
 	//* HELPER FUNCTIONS                              //
+	const postOrder = (newOrder) => {
+		axios.post("https://reqres.in/api/pizza")
+			.then(res => {
+				console.log(res.data);
+				setOrders([ ...orders, res.data.data]);
+			})
+			.catch(err => {
+				console.log(err);
+			})
+	};
+
+	const formSubmit = () => {
+		const newOrder = {
+			size: formValues.size,
+			sauce: formValues.sauce,
+			toppings: toppingsOptions.filter( topping => formValues[topping]),
+			glutenFree: formValues.glutenFree,
+			name: formValues.name,
+			instructions: formValues.instructions,
+			number: formValues.number,
+		};
+		postOrder(newOrder);
+	}
+
 	const formChange = (key, value) => {
 		Yup.reach(formSchema, key)
 			.validate(value)
-			.then( () => {
-				setFormErrors({...formErrors, [key]: "" });
+			.then(() => {
+				setFormErrors({ ...formErrors, [key]: "" });
 			})
 			.catch(err => {
-				setFormErrors({...formErrors, [key]: err.errors[0]});
+				setFormErrors({ ...formErrors, [key]: err.errors[0] });
 			});
 
-			setFormValues({ ...formValues, [key]: value })
+		setFormValues({ ...formValues, [key]: value })
 	};
-	const formSubmit = () => {};
-	const postOrder = (newOrder) => {};
+	// const formSubmit = () => { };
 
 	//* SIDE EFFECTS                                    //
 	useEffect(() => {
@@ -118,7 +148,7 @@ const App = () => {
 					<Confirmation />
 				</Route>
 				<Route path="/pizza-form">
-					<PizzaForm values={formValues} errors={formErrors} disabled={isDisabled} change={formChange} submit={formSubmit} />
+					<PizzaForm values={formValues} errors={formErrors} disabled={isDisabled} change={formChange} submit={formSubmit} toppingsOptions={toppingsOptions} />
 				</Route>
 				<Route path="/">
 					<Home />
