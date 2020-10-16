@@ -175,7 +175,7 @@ const App = () => {
 				<h1>Lambda Eats</h1>
 				<nav>
 					<Link to="/">Home</Link>
-					<Link to="/pizza-form">Pizza?</Link>
+					<Link id="link1" to="/pizza-form">Pizza?</Link>
 				</nav>
 			</Header>
 			<Switch>
